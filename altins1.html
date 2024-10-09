@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altın Fiyat Hesaplama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input[type="number"] {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ALTINS1 Fiyat Hesaplama</h1>
+    <label for="xauUsd">Ons Altın (XAU/USD) Fiyatı:</label>
+    <input type="number" id="xauUsd" placeholder="XAU/USD" step="0.01"><br>
+
+    <label for="usdTry">Dolar/TL Kuru:</label>
+    <input type="number" id="usdTry" placeholder="USD/TRY" step="0.01"><br>
+
+    <button onclick="hesapla()">Hesapla</button>
+
+    <h2>ALTINS1 Fiyatı: <span id="sonuc">0.00</span> TL</h2>
+
+    <script>
+        function hesapla() {
+            // Kullanıcıdan alınan değerler
+            const xauUsd = parseFloat(document.getElementById('xauUsd').value);
+            const usdTry = parseFloat(document.getElementById('usdTry').value);
+
+            // Hesaplama formülü
+            const oran = 0.0321507465; // ons'tan gram'a dönüşüm oranı
+            const saflik = 0.995; // altının saflık derecesi
+
+            if (!isNaN(xauUsd) && !isNaN(usdTry)) {
+                const altins1Fiyati = (xauUsd * usdTry * oran * saflik) / 100;
+                document.getElementById('sonuc').textContent = altins1Fiyati.toFixed(2);
+            } else {
+                alert('Lütfen geçerli bir XAU/USD fiyatı ve USD/TRY kuru girin.');
+            }
+        }
+    </script>
+
+</body>
+</html>
